@@ -35,17 +35,17 @@ function Form() {
         formSchema.isValid(formState).then(valid => {
             setButtonDisable(!valid);
         })
-    }, [formState])
+    }, [formState]);
 
     const validateChange = event => {
         yup
             .reach(formSchema, event.target.name)
             .validate(event.target.value)
             .then(valid => {
-                setErrors({ ...errors,[event.target.name] : "" })
+                setErrors({ ...errors, [event.target.name] : "" });
             })
             .catch( err => {
-                setErrors({ ...errors, [event.target.name] : err.errors})
+                setErrors({ ...errors, [event.target.name] : err.errors});
             })
     }
 
@@ -82,17 +82,17 @@ function Form() {
         <form onSubmit={formSubmit}>
 
             <label htmlFor="name"> Name
-                <input id="name" type="text" value={formState.name} onChange={inputChange}/>
+                <input id="name" type="text" name="name" value={formState.name} onChange={inputChange}/>
                 {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
             </label>
 
             <label htmlFor="password"> Password
-                <input id="password" type="text" value={formState.password} onChange={inputChange}/>
+                <input id="password" type="password" name="password" value={formState.password} onChange={inputChange}/>
                 {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
             </label>
 
             <label htmlFor="email"> Email
-                <input id="email" type="text" value={formState.email} onChange={inputChange}/>
+                <input id="email" type="text" name="email" value={formState.email} onChange={inputChange}/>
                 {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
             </label>
 
