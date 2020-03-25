@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import styled from 'styled-components';
+import './Form.css'
 
+const FormStyle = styled.div`
+    display:flex;
+    flex-direction:column;
+`;
 
 const formSchema = yup.object().shape({
     name: yup.string().required("Please provide your name"),
@@ -80,29 +86,32 @@ function Form() {
 
     return(
         <form onSubmit={formSubmit}>
+            <FormStyle>
 
-            <label htmlFor="name"> Name
-                <input id="name" type="text" name="name" value={formState.name} onChange={inputChange}/>
-                {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
-            </label>
+                <label className="label" htmlFor="name"> Name
+                    <input id="name" type="text" name="name" value={formState.name} onChange={inputChange}/>
+                    {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
+                </label>
 
-            <label htmlFor="password"> Password
-                <input id="password" type="password" name="password" value={formState.password} onChange={inputChange}/>
-                {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
-            </label>
+                <label className="label" htmlFor="password"> Password
+                    <input id="password" type="password" name="password" value={formState.password} onChange={inputChange}/>
+                    {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
+                </label>
 
-            <label htmlFor="email"> Email
-                <input id="email" type="text" name="email" value={formState.email} onChange={inputChange}/>
-                {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
-            </label>
+                <label className="label" htmlFor="email"> Email
+                    <input id="email" type="text" name="email" value={formState.email} onChange={inputChange}/>
+                    {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
+                </label>
 
-            <label htmlFor="terms"> 
-                <input name="terms" type="checkbox" checked={formState.terms} onChange={inputChange}/>Terms and Conditions
-            </label> <br/>
-            
-            <button disabled={buttonDisable}>Submit</button>
+                <label className="checkbox" htmlFor="terms"> 
+                    <input name="terms" type="checkbox" checked={formState.terms} onChange={inputChange}/>Terms and Conditions
+                </label> <br/>
+                
+                <button disabled={buttonDisable}>Submit</button>
 
-            <pre>{JSON.stringify(post, null, 2)}</pre>
+                <pre>{JSON.stringify(post, null, 2)}</pre>
+
+            </FormStyle>            
         </form>
     )
 }
