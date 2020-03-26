@@ -32,6 +32,8 @@ function Form() {
         terms:""
     })
 
+    const [ users, setUsers ] = useState ([])
+
     const [ buttonDisable, setButtonDisable ] = useState(true);
 
 
@@ -61,6 +63,8 @@ function Form() {
             .post('https://reqres.in/api/users', formState)
             .then(response => {
                 setPost(response.data);
+                setUsers([...users, response.data])
+            
                 console.log("success", post);
 
                 setFormState({
@@ -90,27 +94,30 @@ function Form() {
 
                 <label className="label" htmlFor="name"> Name
                     <input id="name" type="text" name="name" value={formState.name} onChange={inputChange}/>
-                    {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
+                    {errors.name.length > 0 ? <p data-cy ="nameError" className="error">{errors.name}</p> : null}
                 </label>
 
                 <label className="label" htmlFor="password"> Password
                     <input id="password" type="password" name="password" value={formState.password} onChange={inputChange}/>
-                    {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
+                    {errors.password.length > 0 ? <p data-cy ="pwdError" className="error">{errors.password}</p> : null}
                 </label>
 
                 <label className="label" htmlFor="email"> Email
-                    <input id="email" type="text" name="email" value={formState.email} onChange={inputChange}/>
-                    {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
+                    <input id="email" type="email" name="email" value={formState.email} onChange={inputChange}/>
+                    {errors.email.length > 0 ? <p data-cy="emailError" className="error">{errors.email}</p> : null}
                 </label>
 
                 <label className="checkbox" htmlFor="terms"> 
                     <input name="terms" type="checkbox" checked={formState.terms} onChange={inputChange}/>Terms and Conditions
                 </label> <br/>
                 
-                <button disabled={buttonDisable}>Submit</button>
+                <button type="submit" disabled={buttonDisable}>Submit</button>
 
                 <pre>{JSON.stringify(post, null, 2)}</pre>
 
+                {users.map( (e) => {
+                    return <div>{e.name}</div>
+                })}
             </FormStyle>            
         </form>
     )
