@@ -1,0 +1,31 @@
+form{
+    width:50%;
+    margin:0 auto;
+}
+.error{
+    color:red;
+}
+
+.label{
+    display:flex;
+    flex-direction: column;
+    margin:3% auto;
+    width:35%;
+}
+
+.checkbox{
+    margin:0 auto;
+    font-size: 20px;
+}
+
+button{
+    margin:0 auto;
+    width:20%;
+    padding:3% 0;
+    background-color:#00BFFF ;
+    font-size: 20px;
+}
+
+pre{
+    margin:5% auto;
+}
